@@ -104,7 +104,7 @@ Upon receipt of this transaction, the system will alter one of the details of th
 	ChgEmp <empId> Member <memberId> Dues <rate>       Put employee in union
 	ChgEmp <empId> NoMember                            Cut employee from union
 
-### Alternative 1: TRansaction errors
+### Alternative 1: Transaction errors
 
 If the structure of the transaction is improper, `<empId>` does not refer to a real employee, or a `<memberId>` already refers to a member, the system will print a suitable error and take no further action.
 
