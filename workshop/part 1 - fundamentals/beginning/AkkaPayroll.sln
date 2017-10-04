@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaPayroll.Client", "src\Client\AkkaPayroll.Client.csproj", "{1DB4CE9F-6AFA-4270-A2DB-E32DFBCE364D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkkaPayroll.Client.Tests", "test\ClientTests\AkkaPayroll.Client.Tests.csproj", "{9597692C-AC07-407D-B90D-2DBF05DCE24F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DB4CE9F-6AFA-4270-A2DB-E32DFBCE364D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB4CE9F-6AFA-4270-A2DB-E32DFBCE364D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB4CE9F-6AFA-4270-A2DB-E32DFBCE364D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB4CE9F-6AFA-4270-A2DB-E32DFBCE364D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9597692C-AC07-407D-B90D-2DBF05DCE24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9597692C-AC07-407D-B90D-2DBF05DCE24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9597692C-AC07-407D-B90D-2DBF05DCE24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9597692C-AC07-407D-B90D-2DBF05DCE24F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FDF4FA3-5196-4230-9EEA-78884839B790}
+	EndGlobalSection
+EndGlobal

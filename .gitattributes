@@ -1,0 +1,6 @@
+# End-of-line normalization
+* text=auto
+
+# Merge configuration
+*.sln merge=binary
+*.csproj merge=binary
