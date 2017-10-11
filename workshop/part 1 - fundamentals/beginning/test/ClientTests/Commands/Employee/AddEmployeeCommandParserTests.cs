@@ -1,9 +1,9 @@
-﻿using AkkaPayroll.Client.Commands.Employee;
+﻿using System;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace AkkaPayroll.Tests.Commands.Employee
+namespace AkkaPayroll.Client.Employee.Adding.Commands
 {
 	public class AddEmployeeCommandParserTests
 	{
@@ -38,6 +38,38 @@ namespace AkkaPayroll.Tests.Commands.Employee
 			var addEmployeeCommand = AddEmployeeCommandParser.Parse(command);
 
 			addEmployeeCommand.Should().Be(expectedAddEmployeeCommand);
+		}
+
+		[Theory]
+		[InlineData("AddEmp")]
+		[InlineData("AddEmp 1 \"John Doe\"")]
+		[InlineData("AddEmp a \"John Doe\" \"Some Street\" H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" H")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" H a")]
+		[InlineData("AddEmp 1 \"John Doe\" S 1000")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" S")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" S b")]
+		[InlineData("AddEmp 1 \"John Doe\" C 1000 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C c 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000 c")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C c d")]
+		public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
+		{
+			Action commandExecutor = () => AddEmployeeCommandParser.Parse(command);
+
+			commandExecutor.ShouldThrow<AddEmployeeCommandStructureException>();
+		}
+
+		[Fact]
+		public void ShouldErrorWhenEmployeeTypeIsNotRecognized()
+		{
+			var command = "AddEmp 1 \"John Doe\" \"Some Street\" Z 1000 1.2";
+			Action commandExecutor = () => AddEmployeeCommandParser.Parse(command);
+
+			commandExecutor.ShouldThrow<AddEmployeeCommandStructureException>();
 		}
 	}
 }
