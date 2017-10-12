@@ -84,8 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Employee\AddEmployeeCommandParserTests.cs" />
-    <Compile Include="Commands\Employee\DeleteEmployeeCommandParserTests.cs" />
+    <Compile Include="Employee\Adding\Commands\AddEmployeeCommandParserTests.cs" />
+    <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommandParserTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
