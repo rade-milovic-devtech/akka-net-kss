@@ -4,14 +4,24 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 {
 	internal class AddSalariedEmployeeCommandArguments : AddEmployeeCommandArguments
 	{
-		public AddSalariedEmployeeCommandArguments(string[] arguments) : base(EmployeeType.Salaried, arguments)
+		public static AddSalariedEmployeeCommandArguments CreateFrom(string[] arguments)
 		{
-			MonthlySalary = GetMonthlySalaryFrom(arguments);
+			Validate(arguments);
+
+			return new AddSalariedEmployeeCommandArguments(
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetMonthlySalaryFrom(arguments));
 		}
 
-		public decimal MonthlySalary { get; }
+		private static void Validate(string[] arguments)
+		{
+			if (arguments.Length > 5)
+				throw new AddEmployeeCommandStructureException();
+		}
 
-		private decimal GetMonthlySalaryFrom(string[] arguments)
+		private static decimal GetMonthlySalaryFrom(string[] arguments)
 		{
 			try
 			{
@@ -22,5 +32,13 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 				throw new AddEmployeeCommandStructureException(ex);
 			}
 		}
+
+		private AddSalariedEmployeeCommandArguments(int id, string name, string address, decimal monthlySalary)
+			: base(id, name, address, EmployeeType.Salaried)
+		{
+			MonthlySalary = monthlySalary;
+		}
+
+		public decimal MonthlySalary { get; }
 	}
 }

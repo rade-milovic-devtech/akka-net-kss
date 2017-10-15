@@ -4,20 +4,7 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 {
 	internal abstract class AddEmployeeCommandArguments
 	{
-		protected AddEmployeeCommandArguments(EmployeeType type, string[] arguments)
-		{
-			Id = GetIdFrom(arguments);
-			Name = GetNameFrom(arguments);
-			Address = GetAddressFrom(arguments);
-			Type = type;
-		}
-
-		public int Id { get; }
-		public string Name { get; }
-		public string Address { get; }
-		public EmployeeType Type { get; }
-
-		private int GetIdFrom(string[] arguments)
+		protected static int GetIdFrom(string[] arguments)
 		{
 			try
 			{
@@ -29,7 +16,7 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 			}
 		}
 
-		private string GetNameFrom(string[] arguments)
+		protected static string GetNameFrom(string[] arguments)
 		{
 			try
 			{
@@ -41,7 +28,7 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 			}
 		}
 
-		private string GetAddressFrom(string[] arguments)
+		protected static string GetAddressFrom(string[] arguments)
 		{
 			try
 			{
@@ -52,5 +39,18 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 				throw new AddEmployeeCommandStructureException(ex);
 			}
 		}
+
+		protected AddEmployeeCommandArguments(int id, string name, string address, EmployeeType type)
+		{
+			Id = id;
+			Name = name;
+			Address = address;
+			Type = type;
+		}
+
+		public int Id { get; }
+		public string Name { get; }
+		public string Address { get; }
+		public EmployeeType Type { get; }
 	}
 }

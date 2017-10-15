@@ -46,11 +46,11 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 				var employeeTypeArgument = arguments[3];
 
 				if (string.Equals(employeeTypeArgument, HourlyEmployee, StringComparison.InvariantCultureIgnoreCase))
-					return new AddHourlyEmployeeCommandArguments(arguments);
+					return AddHourlyEmployeeCommandArguments.CreateFrom(arguments);
 				if (string.Equals(employeeTypeArgument, SalariedEmployee, StringComparison.InvariantCultureIgnoreCase))
-					return new AddSalariedEmployeeCommandArguments(arguments);
+					return AddSalariedEmployeeCommandArguments.CreateFrom(arguments);
 				if (string.Equals(employeeTypeArgument, CommissionedEmployee, StringComparison.InvariantCultureIgnoreCase))
-					return new AddCommissionedEmployeeCommandArguments(arguments);
+					return AddCommissionedEmployeeCommandArguments.CreateFrom(arguments);
 
 				throw new AddEmployeeCommandStructureException();
 			}

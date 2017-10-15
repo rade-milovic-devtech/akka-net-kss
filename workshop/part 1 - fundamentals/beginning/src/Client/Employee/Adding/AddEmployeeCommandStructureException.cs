@@ -4,7 +4,7 @@ namespace AkkaPayroll.Client.Employee.Adding
 {
 	public class AddEmployeeCommandStructureException : Exception
 	{
-		public const string ErrorMessage = "Inappropriate command structure. The required format is: \"AddEmp <empId> \"<name>\" \"<address>\" H | S | C <hourlyRate> | <monthlySalary> | <monthlySalary> <commissionRate>\".";
+		private const string ErrorMessage = "Inappropriate command structure. The required format is: \"AddEmp <empId> \"<name>\" \"<address>\" H | S | C <hourlyRate> | <monthlySalary> | <monthlySalary> <commissionRate>\".";
 
 		public AddEmployeeCommandStructureException() : base(ErrorMessage) {}
 

@@ -4,17 +4,25 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 {
 	internal class AddCommissionedEmployeeCommandArguments : AddEmployeeCommandArguments
 	{
-		public AddCommissionedEmployeeCommandArguments(string[] arguments) : base(EmployeeType.Commissioned, arguments)
+		public static AddCommissionedEmployeeCommandArguments CreateFrom(string[] arguments)
 		{
-			MonthlySalary = GetMonthlySalaryFrom(arguments);
-			CommissionRate = GetCommissionedRateFrom(arguments);
+			Validate(arguments);
+
+			return new AddCommissionedEmployeeCommandArguments(
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetMonthlySalaryFrom(arguments),
+				GetCommissionedRateFrom(arguments));
 		}
 
-		public decimal MonthlySalary { get; }
+		private static void Validate(string[] arguments)
+		{
+			if (arguments.Length > 6)
+				throw new AddEmployeeCommandStructureException();
+		}
 
-		public decimal CommissionRate { get; }
-
-		private decimal GetMonthlySalaryFrom(string[] arguments)
+		private static decimal GetMonthlySalaryFrom(string[] arguments)
 		{
 			try
 			{
@@ -26,7 +34,7 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 			}
 		}
 
-		private decimal GetCommissionedRateFrom(string[] arguments)
+		private static decimal GetCommissionedRateFrom(string[] arguments)
 		{
 			try
 			{
@@ -37,5 +45,16 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 				throw new AddEmployeeCommandStructureException(ex);
 			}
 		}
+
+		private AddCommissionedEmployeeCommandArguments(int id, string name, string address, decimal monthlySalary, decimal commissionRate)
+			: base(id, name, address, EmployeeType.Commissioned)
+		{
+			MonthlySalary = monthlySalary;
+			CommissionRate = commissionRate;
+		}
+
+		public decimal MonthlySalary { get; }
+
+		public decimal CommissionRate { get; }
 	}
 }

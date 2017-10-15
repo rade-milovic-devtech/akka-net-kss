@@ -4,14 +4,24 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 {
 	internal class AddHourlyEmployeeCommandArguments : AddEmployeeCommandArguments
 	{
-		public AddHourlyEmployeeCommandArguments(string[] arguments) : base(EmployeeType.Hourly, arguments)
+		public static AddHourlyEmployeeCommandArguments CreateFrom(string[] arguments)
 		{
-			HourlyRate = GetHourlyRateFrom(arguments);
+			Validate(arguments);
+
+			return new AddHourlyEmployeeCommandArguments(
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetHourlyRateFrom(arguments));
 		}
 
-		public decimal HourlyRate { get; }
+		private static void Validate(string[] arguments)
+		{
+			if (arguments.Length > 5)
+				throw new AddEmployeeCommandStructureException();
+		}
 
-		private decimal GetHourlyRateFrom(string[] arguments)
+		private static decimal GetHourlyRateFrom(string[] arguments)
 		{
 			try
 			{
@@ -22,5 +32,13 @@ namespace AkkaPayroll.Client.Employee.Adding.Arguments
 				throw new AddEmployeeCommandStructureException(ex);
 			}
 		}
+
+		private AddHourlyEmployeeCommandArguments(int id, string name, string address, decimal hourlyRate)
+			: base(id, name, address, EmployeeType.Hourly)
+		{
+			HourlyRate = hourlyRate;
+		}
+
+		public decimal HourlyRate { get; }
 	}
 }
