@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace AkkaPayroll.Client.TimeCard.Adding.Commands
+namespace AkkaPayroll.Client.Common
 {
-    public class DateParser
+    public static class DateParser
     {
         public static DateTime Parse(string date)
         {

@@ -1,9 +1,11 @@
 ﻿using System;
+using AkkaPayroll.Client.Employee.Adding;
+using AkkaPayroll.Client.Employee.Adding.Commands;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace AkkaPayroll.Client.Employee.Adding.Commands
+namespace AkkaPayroll.Client.Tests.Employee.Adding.Commands
 {
 	public class AddEmployeeCommandParserTests
 	{

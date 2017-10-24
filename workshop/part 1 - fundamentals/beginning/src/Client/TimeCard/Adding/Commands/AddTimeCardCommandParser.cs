@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.TimeCard.Adding.Commands
 {
-    public class AddTimeCardCommandParser
+    public static class AddTimeCardCommandParser
     {
         public static AddTimeCardCommand Parse(string command)
         {

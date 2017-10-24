@@ -1,9 +1,11 @@
 ﻿using System;
+using AkkaPayroll.Client.Employee.Deleting;
+using AkkaPayroll.Client.Employee.Deleting.Commands;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace AkkaPayroll.Client.Employee.Deleting.Commands
+namespace AkkaPayroll.Client.Tests.Employee.Deleting.Commands
 {
 	public class DeleteEmployeeCommandParserTests
 	{
