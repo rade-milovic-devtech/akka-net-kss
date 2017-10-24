@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace AkkaPayroll.Client.TimeCard.Adding.Commands
 {
@@ -11,11 +12,22 @@ namespace AkkaPayroll.Client.TimeCard.Adding.Commands
                                         .Where(token => !string.IsNullOrWhiteSpace(token))
                                         .ToArray();
 
-            var employeeId = int.Parse(timeCardTokens[1]);
-            var date = DateParser.Parse(timeCardTokens[2]);
-            var hours = int.Parse(timeCardTokens[3]);
+            try
+            {
+                var employeeId = int.Parse(timeCardTokens[1]);
+                var date = DateParser.Parse(timeCardTokens[2]);
+                var hours = int.Parse(timeCardTokens[3]);
 
-            return new AddTimeCardCommand(employeeId, date, hours);
+                return new AddTimeCardCommand(employeeId, date, hours);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                throw new AddTimeCardCommandStructureException(ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new AddTimeCardCommandStructureException(ex);
+            }
         }
     }
 }

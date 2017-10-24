@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using System;
+using AkkaPayroll.Client.TimeCard.Adding;
 using Xunit;
 
 namespace AkkaPayroll.Client.Tests.TimeCard.Adding.Commands
@@ -17,6 +18,20 @@ namespace AkkaPayroll.Client.Tests.TimeCard.Adding.Commands
             var addTimeCardCommand = AddTimeCardCommandParser.Parse(command);
 
             addTimeCardCommand.Should().Be(expectedAddTimeCardCommand);
+        }
+
+        [Theory]
+        [InlineData("TimeCard")]
+        [InlineData("TimeCard 1")]
+        [InlineData("TimeCard 1 1-2-2012")]
+        [InlineData("TimeCard a 1-2-2012 2")]
+        [InlineData("TimeCard 1 1-2-201a 2")]
+        [InlineData("TimeCard 1 1-2-2012 a")]
+        public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
+        {
+            Action commandExecutor = () => AddTimeCardCommandParser.Parse(command);
+
+            commandExecutor.ShouldThrow<AddTimeCardCommandStructureException>();
         }
     }
 }

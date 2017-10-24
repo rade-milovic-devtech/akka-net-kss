@@ -56,6 +56,7 @@
     <Compile Include="Employee\EmployeeType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeCard\Adding\AddTimeCardCommandStructureException.cs" />
     <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommand.cs" />
     <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommandParser.cs" />
     <Compile Include="TimeCard\Adding\Commands\DateParser.cs" />
