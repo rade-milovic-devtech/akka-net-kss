@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AkkaPayroll.Client.Employee.Adding.Commands
+namespace AkkaPayroll.Client.Employee.Adding
 {
 	public static class AddEmployeeCommandParser
 	{
@@ -16,13 +16,13 @@ namespace AkkaPayroll.Client.Employee.Adding.Commands
 			{
 				var arguments = GetArgumentsFor(command);
 
-				var employeeType = GetEmployeeTypeFor(arguments);
+				var employeeType = GetEmployeeTypeFrom(arguments);
 
 				Validate(arguments, employeeType);
 
 				return BuildFrom(arguments, employeeType);
 			}
-			catch (AddEmployeeCommandStructureException ex)
+			catch (AddEmployeeCommandStructureException)
 			{
 				throw;
 			}
@@ -47,7 +47,7 @@ namespace AkkaPayroll.Client.Employee.Adding.Commands
 			return arguments.ToArray();
 		}
 
-		private static EmployeeType GetEmployeeTypeFor(string[] arguments)
+		private static EmployeeType GetEmployeeTypeFrom(string[] arguments)
 		{
 			var employeeTypeArgument = arguments[3];
 
@@ -87,36 +87,36 @@ namespace AkkaPayroll.Client.Employee.Adding.Commands
 
 		private static AddHourlyEmployeeCommand BuildAddHourlyEmployeeCommandFrom(string[] arguments) =>
 			new AddHourlyEmployeeCommand(
-				GetIdFor(arguments),
-				GetNameFor(arguments),
-				GetAddressFor(arguments),
-				GetHourlyRateFor(arguments));
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetHourlyRateFrom(arguments));
 
 		private static AddSalariedEmployeeCommand BuildAddSalariedEmployeeCommandFrom(string[] arguments) =>
 			new AddSalariedEmployeeCommand(
-				GetIdFor(arguments),
-				GetNameFor(arguments),
-				GetAddressFor(arguments),
-				GetMonthlySalaryFor(arguments));
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetMonthlySalaryFrom(arguments));
 
 		private static AddCommissionedEmployeeCommand BuildAddCommissionedEmployeeCommandFrom(string[] arguments) =>
 			new AddCommissionedEmployeeCommand(
-				GetIdFor(arguments),
-				GetNameFor(arguments),
-				GetAddressFor(arguments),
-				GetMonthlySalaryFor(arguments),
-				GetCommissionRateFor(arguments));
+				GetIdFrom(arguments),
+				GetNameFrom(arguments),
+				GetAddressFrom(arguments),
+				GetMonthlySalaryFrom(arguments),
+				GetCommissionRateFrom(arguments));
 
-		private static int GetIdFor(string[] arguments) => int.Parse(arguments[0]);
+		private static int GetIdFrom(string[] arguments) => int.Parse(arguments[0]);
 
-		private static string GetNameFor(string[] arguments) => arguments[1];
+		private static string GetNameFrom(string[] arguments) => arguments[1];
 
-		private static string GetAddressFor(string[] arguments) => arguments[2];
+		private static string GetAddressFrom(string[] arguments) => arguments[2];
 
-		private static decimal GetHourlyRateFor(string[] arguments) => decimal.Parse(arguments[4]);
+		private static decimal GetHourlyRateFrom(string[] arguments) => decimal.Parse(arguments[4]);
 
-		private static decimal GetMonthlySalaryFor(string[] arguments) => decimal.Parse(arguments[4]);
+		private static decimal GetMonthlySalaryFrom(string[] arguments) => decimal.Parse(arguments[4]);
 
-		private static decimal GetCommissionRateFor(string[] arguments) => decimal.Parse(arguments[5]);
+		private static decimal GetCommissionRateFrom(string[] arguments) => decimal.Parse(arguments[5]);
 	}
 }

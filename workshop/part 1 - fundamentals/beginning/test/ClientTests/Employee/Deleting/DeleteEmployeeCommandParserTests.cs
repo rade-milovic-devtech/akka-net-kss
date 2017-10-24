@@ -1,11 +1,10 @@
 ﻿using System;
 using AkkaPayroll.Client.Employee.Deleting;
-using AkkaPayroll.Client.Employee.Deleting.Commands;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace AkkaPayroll.Client.Tests.Employee.Deleting.Commands
+namespace AkkaPayroll.Client.Tests.Employee.Deleting
 {
 	public class DeleteEmployeeCommandParserTests
 	{
@@ -15,9 +14,9 @@ namespace AkkaPayroll.Client.Tests.Employee.Deleting.Commands
 			var expectedDeleteEmployeeCommand = new DeleteEmployeeCommand(id);
 			var command = $"DelEmp {id}";
 
-			var addEmployeeCommand = DeleteEmployeeCommandParser.Parse(command);
+			var deleteEmployeeCommand = DeleteEmployeeCommandParser.Parse(command);
 
-			addEmployeeCommand.Should().Be(expectedDeleteEmployeeCommand);
+			deleteEmployeeCommand.Should().Be(expectedDeleteEmployeeCommand);
 		}
 
 		[Theory]

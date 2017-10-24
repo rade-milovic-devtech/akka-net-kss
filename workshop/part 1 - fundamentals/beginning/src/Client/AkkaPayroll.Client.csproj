@@ -37,27 +37,27 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee\Adding\Commands\AddCommissionedEmployeeCommand.cs" />
-    <Compile Include="Employee\Adding\Commands\AddEmployeeCommand.cs" />
-    <Compile Include="Employee\Adding\Commands\AddEmployeeCommandParser.cs" />
+    <Compile Include="Employee\Adding\AddCommissionedEmployeeCommand.cs" />
+    <Compile Include="Employee\Adding\AddEmployeeCommand.cs" />
+    <Compile Include="Employee\Adding\AddEmployeeCommandParser.cs" />
     <Compile Include="Employee\Adding\AddEmployeeCommandStructureException.cs" />
-    <Compile Include="Employee\Adding\Commands\AddHourlyEmployeeCommand.cs" />
-    <Compile Include="Employee\Adding\Commands\AddSalariedEmployeeCommand.cs" />
-    <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommand.cs" />
-    <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommandParser.cs" />
+    <Compile Include="Employee\Adding\AddHourlyEmployeeCommand.cs" />
+    <Compile Include="Employee\Adding\AddSalariedEmployeeCommand.cs" />
+    <Compile Include="Employee\Deleting\DeleteEmployeeCommand.cs" />
+    <Compile Include="Employee\Deleting\DeleteEmployeeCommandParser.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandStructureException.cs" />
     <Compile Include="Employee\EmployeeType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SalesReceipt\Adding\AddSalesReceiptCommandStructureException.cs" />
-    <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommand.cs" />
-    <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommandParser.cs" />
-    <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommand.cs" />
-    <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommandParser.cs" />
+    <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommand.cs" />
+    <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommandParser.cs" />
+    <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommandStructureException.cs" />
+    <Compile Include="ServiceCharge\Posting\PostServiceChargeCommand.cs" />
+    <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandParser.cs" />
     <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandStructureException.cs" />
-    <Compile Include="TimeCard\Adding\AddTimeCardCommandStructureException.cs" />
-    <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommand.cs" />
-    <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommandParser.cs" />
+    <Compile Include="TimeCard\Posting\PostTimeCardCommand.cs" />
+    <Compile Include="TimeCard\Posting\PostTimeCardCommandParser.cs" />
+    <Compile Include="TimeCard\Posting\PostTimeCardCommandStructureException.cs" />
     <Compile Include="Common\DateParser.cs" />
   </ItemGroup>
   <ItemGroup>

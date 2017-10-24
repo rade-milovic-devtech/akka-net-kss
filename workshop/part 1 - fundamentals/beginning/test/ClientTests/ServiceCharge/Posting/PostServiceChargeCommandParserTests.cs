@@ -1,11 +1,10 @@
 ﻿using System;
 using AkkaPayroll.Client.ServiceCharge.Posting;
-using AkkaPayroll.Client.ServiceCharge.Posting.Commands;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace AkkaPayroll.Client.Tests.ServiceCharge.Posting.Commands
+namespace AkkaPayroll.Client.Tests.ServiceCharge.Posting
 {
 	public class PostServiceChargeCommandParserTests
 	{
@@ -15,9 +14,9 @@ namespace AkkaPayroll.Client.Tests.ServiceCharge.Posting.Commands
 			var expectedPostServiceChargeCommand = new PostServiceChargeCommand(memberId, amount);
 			var command = $"ServiceCharge {memberId} {amount}";
 
-			var addTimeCardCommand = PostServiceChargeCommandParser.Parse(command);
+			var postServiceChargeCommand = PostServiceChargeCommandParser.Parse(command);
 
-			addTimeCardCommand.Should().Be(expectedPostServiceChargeCommand);
+			postServiceChargeCommand.Should().Be(expectedPostServiceChargeCommand);
 		}
 
 		[Theory]

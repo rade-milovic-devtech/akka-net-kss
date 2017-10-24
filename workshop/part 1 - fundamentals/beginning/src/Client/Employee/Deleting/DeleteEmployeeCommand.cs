@@ -1,4 +1,4 @@
-﻿namespace AkkaPayroll.Client.Employee.Deleting.Commands
+﻿namespace AkkaPayroll.Client.Employee.Deleting
 {
 	public class DeleteEmployeeCommand
 	{

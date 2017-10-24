@@ -84,11 +84,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee\Adding\Commands\AddEmployeeCommandParserTests.cs" />
-    <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommandParserTests.cs" />
-    <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommandParserTests.cs" />
-    <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommandParserTests.cs" />
-    <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommandParserTests.cs" />
+    <Compile Include="Employee\Adding\AddEmployeeCommandParserTests.cs" />
+    <Compile Include="Employee\Deleting\DeleteEmployeeCommandParserTests.cs" />
+    <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommandParserTests.cs" />
+    <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandParserTests.cs" />
+    <Compile Include="TimeCard\Posting\PostTimeCardCommandParserTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

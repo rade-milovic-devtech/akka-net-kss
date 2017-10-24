@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AkkaPayroll.Client.Employee.Deleting.Commands
+namespace AkkaPayroll.Client.Employee.Deleting
 {
 	public static class DeleteEmployeeCommandParser
 	{
@@ -13,7 +13,7 @@ namespace AkkaPayroll.Client.Employee.Deleting.Commands
 
 			try
 			{
-				var id = GetIdFor(arguments);
+				var id = GetIdFrom(arguments);
 
 				return new DeleteEmployeeCommand(id);
 			}
@@ -38,6 +38,6 @@ namespace AkkaPayroll.Client.Employee.Deleting.Commands
 				throw new DeleteEmployeeCommandStructureException();
 		}
 
-		private static int GetIdFor(string[] arguments) => int.Parse(arguments[0]);
+		private static int GetIdFrom(string[] arguments) => int.Parse(arguments[0]);
 	}
 }

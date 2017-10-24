@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AkkaPayroll.Client.ServiceCharge.Posting.Commands
+namespace AkkaPayroll.Client.ServiceCharge.Posting
 {
 	public static class PostServiceChargeCommandParser
 	{
@@ -13,8 +13,8 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting.Commands
 
 			try
 			{
-				var memberId = GetMemberIdFor(arguments);
-				var amount = GetAmountFor(arguments);
+				var memberId = GetMemberIdFrom(arguments);
+				var amount = GetAmountFrom(arguments);
 
 				return new PostServiceChargeCommand(memberId, amount);
 			}
@@ -39,8 +39,8 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting.Commands
 				throw new PostServiceChargeCommandStructureException();
 		}
 
-		private static int GetMemberIdFor(string[] arguments) => int.Parse(arguments[0]);
+		private static int GetMemberIdFrom(string[] arguments) => int.Parse(arguments[0]);
 
-		private static decimal GetAmountFor(string[] arguments) => decimal.Parse(arguments[1]);
+		private static decimal GetAmountFrom(string[] arguments) => decimal.Parse(arguments[1]);
 	}
 }

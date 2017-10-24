@@ -1,4 +1,4 @@
-﻿namespace AkkaPayroll.Client.Employee.Adding.Commands
+﻿namespace AkkaPayroll.Client.Employee.Adding
 {
 	public class AddHourlyEmployeeCommand : AddEmployeeCommand
 	{
