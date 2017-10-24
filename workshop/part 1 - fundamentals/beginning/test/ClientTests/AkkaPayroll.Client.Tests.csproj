@@ -87,6 +87,7 @@
     <Compile Include="Employee\Adding\Commands\AddEmployeeCommandParserTests.cs" />
     <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommandParserTests.cs" />
     <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommandParserTests.cs" />
+    <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommandParserTests.cs" />
     <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommandParserTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
