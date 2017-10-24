@@ -22,8 +22,8 @@ namespace AkkaPayroll.Client.TimeCard.Adding.Commands
 			if (ReferenceEquals(addTimeCardCommand, null)) return false;
 
 			return employeeId == addTimeCardCommand.employeeId
-					&& date == addTimeCardCommand.date
-					&& hours == addTimeCardCommand.hours;
+				&& date == addTimeCardCommand.date
+				&& hours == addTimeCardCommand.hours;
 		}
 
 		public override int GetHashCode()
