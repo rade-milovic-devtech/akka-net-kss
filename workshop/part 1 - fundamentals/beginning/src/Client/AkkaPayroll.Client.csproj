@@ -48,8 +48,6 @@
     <Compile Include="Employee\Adding\Arguments\AddHourlyEmployeeCommandArguments.cs" />
     <Compile Include="Employee\Adding\Commands\AddSalariedEmployeeCommand.cs" />
     <Compile Include="Employee\Adding\Arguments\AddSalariedEmployeeCommandArguments.cs" />
-    <Compile Include="Employee\Deleting\Arguments\DeleteEmployeeArguments.cs" />
-    <Compile Include="Employee\Deleting\Arguments\DeleteEmployeeCommandArgumentsParser.cs" />
     <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommand.cs" />
     <Compile Include="Employee\Deleting\Commands\DeleteEmployeeCommandParser.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandStructureException.cs" />

@@ -1,4 +1,5 @@
-﻿using AkkaPayroll.Client.Employee.Deleting.Arguments;
+﻿using System;
+using System.Linq;
 
 namespace AkkaPayroll.Client.Employee.Deleting.Commands
 {
@@ -6,9 +7,37 @@ namespace AkkaPayroll.Client.Employee.Deleting.Commands
 	{
 		public static DeleteEmployeeCommand Parse(string command)
 		{
-			var arguments = DeleteEmployeeCommandArgumentsParser.Parse(command);
+			var arguments = GetArgumentsFor(command);
 
-			return new DeleteEmployeeCommand(arguments.Id);
+			Validate(arguments);
+
+			try
+			{
+				var id = GetIdFor(arguments);
+
+				return new DeleteEmployeeCommand(id);
+			}
+			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			{
+				throw new DeleteEmployeeCommandStructureException(ex);
+			}
 		}
+
+		private static string[] GetArgumentsFor(string command)
+		{
+			var commandTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);;
+
+			return commandTokens.Where(token => !string.IsNullOrWhiteSpace(token))
+				.Skip(1)
+				.ToArray();
+		}
+
+		private static void Validate(string[] arguments)
+		{
+			if (arguments.Length > 1)
+				throw new DeleteEmployeeCommandStructureException();
+		}
+
+		private static int GetIdFor(string[] arguments) => int.Parse(arguments[0]);
 	}
 }
