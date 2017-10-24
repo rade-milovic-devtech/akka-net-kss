@@ -54,6 +54,7 @@
     <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommandParser.cs" />
     <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommand.cs" />
     <Compile Include="ServiceCharge\Posting\Commands\PostServiceChargeCommandParser.cs" />
+    <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandStructureException.cs" />
     <Compile Include="TimeCard\Adding\AddTimeCardCommandStructureException.cs" />
     <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommand.cs" />
     <Compile Include="TimeCard\Adding\Commands\AddTimeCardCommandParser.cs" />

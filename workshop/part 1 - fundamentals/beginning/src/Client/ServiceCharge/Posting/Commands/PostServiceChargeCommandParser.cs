@@ -9,10 +9,19 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting.Commands
 		{
 			var arguments = GetArgumentsFor(command);
 
-			var memberId = GetMemberIdFor(arguments);
-			var amount = GetAmountFor(arguments);
+			Validate(arguments);
 
-			return new PostServiceChargeCommand(memberId, amount);
+			try
+			{
+				var memberId = GetMemberIdFor(arguments);
+				var amount = GetAmountFor(arguments);
+
+				return new PostServiceChargeCommand(memberId, amount);
+			}
+			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			{
+				throw new PostServiceChargeCommandStructureException(ex);
+			}
 		}
 
 		private static string[] GetArgumentsFor(string command)
@@ -22,6 +31,12 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting.Commands
 			return commandTokens.Where(token => !string.IsNullOrWhiteSpace(token))
 				.Skip(1)
 				.ToArray();
+		}
+
+		private static void Validate(string[] arguments)
+		{
+			if (arguments.Length > 2)
+				throw new PostServiceChargeCommandStructureException();
 		}
 
 		private static int GetMemberIdFor(string[] arguments) => int.Parse(arguments[0]);
