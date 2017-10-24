@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace AkkaPayroll.Client.TimeCard.Adding.Commands
 {
@@ -20,11 +19,7 @@ namespace AkkaPayroll.Client.TimeCard.Adding.Commands
 
                 return new AddTimeCardCommand(employeeId, date, hours);
             }
-            catch (IndexOutOfRangeException ex)
-            {
-                throw new AddTimeCardCommandStructureException(ex);
-            }
-            catch (FormatException ex)
+            catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
             {
                 throw new AddTimeCardCommandStructureException(ex);
             }
