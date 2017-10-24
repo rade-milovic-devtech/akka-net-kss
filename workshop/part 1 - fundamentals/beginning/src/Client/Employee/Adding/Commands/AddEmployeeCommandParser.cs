@@ -1,19 +1,78 @@
-﻿using AkkaPayroll.Client.Employee.Adding.Arguments;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AkkaPayroll.Client.Employee.Adding.Commands
 {
 	public static class AddEmployeeCommandParser
 	{
+		private const string HourlyEmployee = "H";
+		private const string SalariedEmployee = "S";
+		private const string CommissionedEmployee = "C";
+
 		public static AddEmployeeCommand Parse(string command)
 		{
-			var arguments = AddEmployeeCommandArgumentsParser.Parse(command);
+			try
+			{
+				var arguments = GetArgumentsFor(command);
 
-			return BuildFrom(arguments);
+				var employeeType = GetEmployeeTypeFor(arguments);
+
+				Validate(arguments, employeeType);
+
+				return BuildFrom(arguments, employeeType);
+			}
+			catch (AddEmployeeCommandStructureException ex)
+			{
+				throw;
+			}
+			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			{
+				throw new AddEmployeeCommandStructureException(ex);
+			}
 		}
 
-		private static AddEmployeeCommand BuildFrom(AddEmployeeCommandArguments arguments)
+		private static string[] GetArgumentsFor(string command)
 		{
-			switch (arguments.Type)
+			var commandTokens = command.Split(new[] { '"' }, StringSplitOptions.RemoveEmptyEntries)
+				.Where(token => !string.IsNullOrWhiteSpace(token))
+				.ToArray();
+
+			var arguments = new List<string>();
+			arguments.Add(commandTokens[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1]);
+			arguments.Add(commandTokens[1]);
+			arguments.Add(commandTokens[2]);
+			arguments.AddRange(commandTokens[3].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+
+			return arguments.ToArray();
+		}
+
+		private static EmployeeType GetEmployeeTypeFor(string[] arguments)
+		{
+			var employeeTypeArgument = arguments[3];
+
+			if (string.Equals(employeeTypeArgument, HourlyEmployee, StringComparison.InvariantCultureIgnoreCase))
+				return EmployeeType.Hourly;
+			if (string.Equals(employeeTypeArgument, SalariedEmployee, StringComparison.InvariantCultureIgnoreCase))
+				return EmployeeType.Salaried;
+			if (string.Equals(employeeTypeArgument, CommissionedEmployee, StringComparison.InvariantCultureIgnoreCase))
+				return EmployeeType.Commissioned;
+
+			throw new AddEmployeeCommandStructureException();
+		}
+
+		private static void Validate(string[] arguments, EmployeeType employeeType)
+		{
+			if (employeeType == EmployeeType.Commissioned && arguments.Length <= 6) return;
+
+			if (arguments.Length <= 5) return;
+
+			throw new AddEmployeeCommandStructureException();
+		}
+
+		private static AddEmployeeCommand BuildFrom(string[] arguments, EmployeeType employeeType)
+		{
+			switch (employeeType)
 			{
 				case EmployeeType.Hourly:
 					return BuildAddHourlyEmployeeCommandFrom(arguments);
@@ -26,38 +85,38 @@ namespace AkkaPayroll.Client.Employee.Adding.Commands
 			}
 		}
 
-		private static AddHourlyEmployeeCommand BuildAddHourlyEmployeeCommandFrom(AddEmployeeCommandArguments arguments)
-		{
-			var hourlyEmployeeCommandArguments = arguments as AddHourlyEmployeeCommandArguments;
+		private static AddHourlyEmployeeCommand BuildAddHourlyEmployeeCommandFrom(string[] arguments) =>
+			new AddHourlyEmployeeCommand(
+				GetIdFor(arguments),
+				GetNameFor(arguments),
+				GetAddressFor(arguments),
+				GetHourlyRateFor(arguments));
 
-			return new AddHourlyEmployeeCommand(
-				hourlyEmployeeCommandArguments.Id,
-				hourlyEmployeeCommandArguments.Name,
-				hourlyEmployeeCommandArguments.Address,
-				hourlyEmployeeCommandArguments.HourlyRate);
-		}
+		private static AddSalariedEmployeeCommand BuildAddSalariedEmployeeCommandFrom(string[] arguments) =>
+			new AddSalariedEmployeeCommand(
+				GetIdFor(arguments),
+				GetNameFor(arguments),
+				GetAddressFor(arguments),
+				GetMonthlySalaryFor(arguments));
 
-		private static AddSalariedEmployeeCommand BuildAddSalariedEmployeeCommandFrom(AddEmployeeCommandArguments arguments)
-		{
-			var salariedEmployeeCommandArguments = arguments as AddSalariedEmployeeCommandArguments;
+		private static AddCommissionedEmployeeCommand BuildAddCommissionedEmployeeCommandFrom(string[] arguments) =>
+			new AddCommissionedEmployeeCommand(
+				GetIdFor(arguments),
+				GetNameFor(arguments),
+				GetAddressFor(arguments),
+				GetMonthlySalaryFor(arguments),
+				GetCommissionRateFor(arguments));
 
-			return new AddSalariedEmployeeCommand(
-				salariedEmployeeCommandArguments.Id,
-				salariedEmployeeCommandArguments.Name,
-				salariedEmployeeCommandArguments.Address,
-				salariedEmployeeCommandArguments.MonthlySalary);
-		}
+		private static int GetIdFor(string[] arguments) => int.Parse(arguments[0]);
 
-		private static AddCommissionedEmployeeCommand BuildAddCommissionedEmployeeCommandFrom(AddEmployeeCommandArguments arguments)
-		{
-			var commissionedEmployeeCommandArguments = arguments as AddCommissionedEmployeeCommandArguments;
+		private static string GetNameFor(string[] arguments) => arguments[1];
 
-			return new AddCommissionedEmployeeCommand(
-				commissionedEmployeeCommandArguments.Id,
-				commissionedEmployeeCommandArguments.Name,
-				commissionedEmployeeCommandArguments.Address,
-				commissionedEmployeeCommandArguments.MonthlySalary,
-				commissionedEmployeeCommandArguments.CommissionRate);
-		}
+		private static string GetAddressFor(string[] arguments) => arguments[2];
+
+		private static decimal GetHourlyRateFor(string[] arguments) => decimal.Parse(arguments[4]);
+
+		private static decimal GetMonthlySalaryFor(string[] arguments) => decimal.Parse(arguments[4]);
+
+		private static decimal GetCommissionRateFor(string[] arguments) => decimal.Parse(arguments[5]);
 	}
 }
