@@ -6,8 +6,6 @@ namespace AkkaPayroll.Client.TimeCard.Adding
     {
         private const string ErrorMessage = "Inappropriate command structure. The required format is: \"TimeCard <empId> <date> <hours>\".";
 
-        public AddTimeCardCommandStructureException() : base(ErrorMessage) { }
-
         public AddTimeCardCommandStructureException(Exception innerException) : base(ErrorMessage, innerException) { }
     }
 }

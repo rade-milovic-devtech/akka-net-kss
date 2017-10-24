@@ -56,6 +56,7 @@
     <Compile Include="Employee\EmployeeType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesReceipt\Adding\AddSalesReceiptCommandStructureException.cs" />
     <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommand.cs" />
     <Compile Include="SalesReceipt\Adding\Commands\AddSalesReceiptCommandParser.cs" />
     <Compile Include="TimeCard\Adding\AddTimeCardCommandStructureException.cs" />

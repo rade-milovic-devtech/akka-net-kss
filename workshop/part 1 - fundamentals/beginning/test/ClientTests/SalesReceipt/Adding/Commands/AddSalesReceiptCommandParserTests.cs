@@ -1,4 +1,5 @@
 ﻿using System;
+using AkkaPayroll.Client.SalesReceipt.Adding;
 using AkkaPayroll.Client.SalesReceipt.Adding.Commands;
 using FluentAssertions;
 using Ploeh.AutoFixture.Xunit2;
@@ -17,6 +18,20 @@ namespace AkkaPayroll.Client.Tests.SalesReceipt.Adding.Commands
             var addTimeCardCommand = AddSalesReceiptCommandParser.Parse(command);
 
             addTimeCardCommand.Should().Be(expectedAddTimeCardCommand);
+        }
+
+        [Theory]
+        [InlineData("SalesReceipt")]
+        [InlineData("SalesReceipt 1")]
+        [InlineData("SalesReceipt 1 1-2-2012")]
+        [InlineData("SalesReceipt a 1-2-2012 2")]
+        [InlineData("SalesReceipt 1 1-2-201a 2")]
+        [InlineData("SalesReceipt 1 1-2-2012 a")]
+        public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
+        {
+            Action commandExecutor = () => AddSalesReceiptCommandParser.Parse(command);
+
+            commandExecutor.ShouldThrow<AddSalesReceiptCommandStructureException>();
         }
     }
 }

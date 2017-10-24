@@ -8,15 +8,22 @@ namespace AkkaPayroll.Client.SalesReceipt.Adding.Commands
     {
         public static AddSalesReceiptCommand Parse(string command)
         {
-            var timeCardTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+            var timeCardTokens = command.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
                 .Where(token => !string.IsNullOrWhiteSpace(token))
                 .ToArray();
 
-            var employeeId = int.Parse(timeCardTokens[1]);
-            var date = DateParser.Parse(timeCardTokens[2]);
-            var amount = decimal.Parse(timeCardTokens[3]);
+            try
+            {
+                var employeeId = int.Parse(timeCardTokens[1]);
+                var date = DateParser.Parse(timeCardTokens[2]);
+                var amount = decimal.Parse(timeCardTokens[3]);
 
-            return new AddSalesReceiptCommand(employeeId, date, amount);
+                return new AddSalesReceiptCommand(employeeId, date, amount);
+            }
+            catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+            {
+                throw new AddSalesReceiptCommandStructureException(ex);
+            }
         }
     }
 }
