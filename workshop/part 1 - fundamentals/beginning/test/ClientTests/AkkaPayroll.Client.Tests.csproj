@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee\Adding\AddEmployeeCommandParserTests.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeCommandParserTests.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandParserTests.cs" />
     <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommandParserTests.cs" />
     <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandParserTests.cs" />
