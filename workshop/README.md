@@ -97,7 +97,7 @@ Upon receipt of this transaction, the system will alter one of the details of th
 	ChgEmp <empId> Address <address>                   Change employee address
 	ChgEmp <empId> Hourly <hourlyRate>                 Change to hourly
 	ChgEmp <empId> Salaried <salary>                   Change to salaried
-	ChgEmp <empId> Commissioned <hourlyRate> <rate>    Change to commissioned
+	ChgEmp <empId> Commissioned <salary> <rate>        Change to commissioned
 	ChgEmp <empId> Hold                                Hold paycheck
 	ChgEmp <empId> Direct <bank> <account>             Direct deposit
 	ChgEmp <empId> Mail <address>                      Mail paycheck
