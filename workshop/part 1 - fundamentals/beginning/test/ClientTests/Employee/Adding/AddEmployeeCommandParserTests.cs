@@ -60,6 +60,8 @@ namespace AkkaPayroll.Client.Tests.Employee.Adding
 		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000 c")]
 		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C c d")]
 		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000 1.2 c")]
+		[InlineData("AddEmp 1 John \"Some Street\" H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" Street H 1.2")]
 		public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
 		{
 			Action commandExecutor = () => AddEmployeeCommandParser.Parse(command);
