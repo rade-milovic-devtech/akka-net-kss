@@ -1,4 +1,6 @@
-﻿namespace AkkaPayroll.Client.Employee.Adding
+﻿using System;
+
+namespace AkkaPayroll.Client.Employee.Adding
 {
 	public abstract class AddEmployeeCommand
 	{
@@ -21,8 +23,8 @@
 				return false;
 
 			return Id == addEmployeeCommand.Id
-				&& Name == addEmployeeCommand.Name
-				&& Address == addEmployeeCommand.Address;
+				&& string.Equals(Name, addEmployeeCommand.Name, StringComparison.InvariantCultureIgnoreCase)
+				&& string.Equals(Address, addEmployeeCommand.Address, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		public override int GetHashCode()

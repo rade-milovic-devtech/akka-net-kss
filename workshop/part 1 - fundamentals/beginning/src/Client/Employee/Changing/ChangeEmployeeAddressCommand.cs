@@ -20,8 +20,8 @@ namespace AkkaPayroll.Client.Employee.Changing
 			if (ReferenceEquals(changeEmployeeAddressCommand, null))
 				return false;
 
-			return Id == changeEmployeeAddressCommand.Id &&
-				string.Equals(Address, changeEmployeeAddressCommand.Address, StringComparison.CurrentCultureIgnoreCase);
+			return Id == changeEmployeeAddressCommand.Id
+				&& string.Equals(Address, changeEmployeeAddressCommand.Address, StringComparison.CurrentCultureIgnoreCase);
 		}
 
 		public override int GetHashCode()

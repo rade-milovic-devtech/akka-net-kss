@@ -1,4 +1,6 @@
-﻿namespace AkkaPayroll.Client.Employee.Changing
+﻿using System;
+
+namespace AkkaPayroll.Client.Employee.Changing
 {
 	public class ChangeEmployeeNameCommand
 	{
@@ -18,7 +20,8 @@
 			if (ReferenceEquals(changeEmployeeNameCommand, null))
 				return false;
 
-			return Id == changeEmployeeNameCommand.Id && Name == changeEmployeeNameCommand.Name;
+			return Id == changeEmployeeNameCommand.Id
+				&& string.Equals(Name, changeEmployeeNameCommand.Name, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		public override int GetHashCode()
