@@ -43,6 +43,8 @@
     <Compile Include="Employee\Adding\AddEmployeeCommandStructureException.cs" />
     <Compile Include="Employee\Adding\AddHourlyEmployeeCommand.cs" />
     <Compile Include="Employee\Adding\AddSalariedEmployeeCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeAddressCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeAddressCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeCommandStructureException.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommandParser.cs" />
