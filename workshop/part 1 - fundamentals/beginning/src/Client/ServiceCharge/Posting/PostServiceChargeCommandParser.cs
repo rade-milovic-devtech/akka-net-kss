@@ -7,16 +7,13 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting
 	{
 		public static PostServiceChargeCommand Parse(string command)
 		{
-			var arguments = GetArgumentsFor(command);
-
-			Validate(arguments);
-
 			try
 			{
-				var memberId = GetMemberIdFrom(arguments);
-				var amount = GetAmountFrom(arguments);
+				var arguments = GetArgumentsFor(command);
 
-				return new PostServiceChargeCommand(memberId, amount);
+				Validate(arguments);
+
+				return new PostServiceChargeCommand(GetMemberIdFrom(arguments), GetAmountFrom(arguments));
 			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{

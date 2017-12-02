@@ -8,17 +8,16 @@ namespace AkkaPayroll.Client.TimeCard.Posting
 	{
 		public static PostTimeCardCommand Parse(string command)
 		{
-			var arguments = GetArgumentsFor(command);
-
-			Validate(arguments);
-
 			try
 			{
-				var employeeId = GetEmployeeIdFrom(arguments);
-				var date = GetDateFrom(arguments);
-				var hours = GetHoursFrom(arguments);
+				var arguments = GetArgumentsFor(command);
 
-				return new PostTimeCardCommand(employeeId, date, hours);
+				Validate(arguments);
+
+				return new PostTimeCardCommand(
+					GetEmployeeIdFrom(arguments),
+					GetDateFrom(arguments),
+					GetHoursFrom(arguments));
 			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{

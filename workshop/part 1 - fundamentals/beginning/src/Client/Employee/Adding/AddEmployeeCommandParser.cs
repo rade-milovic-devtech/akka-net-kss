@@ -22,10 +22,6 @@ namespace AkkaPayroll.Client.Employee.Adding
 
 				return BuildFrom(arguments, employeeType);
 			}
-			catch (AddEmployeeCommandStructureException)
-			{
-				throw;
-			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{
 				throw new AddEmployeeCommandStructureException(ex);

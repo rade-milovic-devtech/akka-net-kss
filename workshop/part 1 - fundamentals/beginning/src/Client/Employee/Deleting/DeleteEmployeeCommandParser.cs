@@ -7,15 +7,13 @@ namespace AkkaPayroll.Client.Employee.Deleting
 	{
 		public static DeleteEmployeeCommand Parse(string command)
 		{
-			var arguments = GetArgumentsFor(command);
-
-			Validate(arguments);
-
 			try
 			{
-				var id = GetIdFrom(arguments);
+				var arguments = GetArgumentsFor(command);
 
-				return new DeleteEmployeeCommand(id);
+				Validate(arguments);
+
+				return new DeleteEmployeeCommand(GetIdFrom(arguments));
 			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{

@@ -8,17 +8,16 @@ namespace AkkaPayroll.Client.SalesReceipt.Posting
 	{
 		public static PostSalesReceiptCommand Parse(string command)
 		{
-			var arguments = GetArgumentsFor(command);
-
-			Validate(arguments);
-
 			try
 			{
-				var employeeId = GetEmployeeIdFrom(arguments);
-				var date = GetDateFrom(arguments);
-				var amount = GetAmountFrom(arguments);
+				var arguments = GetArgumentsFor(command);
 
-				return new PostSalesReceiptCommand(employeeId, date, amount);
+				Validate(arguments);
+
+				return new PostSalesReceiptCommand(
+					GetEmployeeIdFrom(arguments),
+					GetDateFrom(arguments),
+					GetAmountFrom(arguments));
 			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{
