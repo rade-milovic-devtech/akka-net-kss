@@ -6,7 +6,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 {
 	public static class ChangeEmployeeNameCommandParser
 	{
-		private const string NameProperty = "name";
+		private const string NameChangeType = "name";
 
 		public static ChangeEmployeeNameCommand Parse(string command)
 		{
@@ -20,7 +20,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 			}
 			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
 			{
-				throw new ChangeEmployeeCommandStructureException(ex);
+				throw new ChangeEmployeeNameCommandStructureException(ex);
 			}
 		}
 
@@ -41,14 +41,14 @@ namespace AkkaPayroll.Client.Employee.Changing
 		private static void Validate(string[] arguments)
 		{
 			if (arguments.Length > 3)
-				throw new ChangeEmployeeCommandStructureException();
+				throw new ChangeEmployeeNameCommandStructureException();
 
-			var nameProperty = GetNamePropertyFrom(arguments);
-			if (!string.Equals(nameProperty, NameProperty, StringComparison.InvariantCultureIgnoreCase))
-				throw new ChangeEmployeeCommandStructureException();
+			var changeType = GetChangeTypeFrom(arguments);
+			if (!string.Equals(changeType, NameChangeType, StringComparison.InvariantCultureIgnoreCase))
+				throw new ChangeEmployeeNameCommandStructureException();
 		}
 
-		private static string GetNamePropertyFrom(string[] arguments) => arguments[1];
+		private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
 
 		private static int GetIdFrom(string[] arguments) => int.Parse(arguments[0]);
 

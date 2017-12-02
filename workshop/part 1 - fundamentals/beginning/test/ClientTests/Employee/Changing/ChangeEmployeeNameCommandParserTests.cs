@@ -31,7 +31,7 @@ namespace AkkaPayroll.Client.Tests.Employee.Changing
 		{
 			Action action = () => ChangeEmployeeNameCommandParser.Parse(command);
 
-			action.ShouldThrow<ChangeEmployeeCommandStructureException>();
+			action.ShouldThrow<ChangeEmployeeNameCommandStructureException>();
 		}
 	}
 }
