@@ -6,7 +6,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 {
 	public static class ChangeEmployeeAddressCommandParser
 	{
-		private const string AddressChangeType = "address";
+		private const string Address = "address";
 		
 		public static ChangeEmployeeAddressCommand Parse(string command)
 		{
@@ -44,7 +44,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 				throw new ChangeEmployeeAddressCommandStructureException();
 
 			var changeType = GetChangeTypeFrom(arguments);
-			if (!string.Equals(changeType, AddressChangeType, StringComparison.InvariantCultureIgnoreCase))
+			if (!string.Equals(changeType, Address, StringComparison.InvariantCultureIgnoreCase))
 				throw new ChangeEmployeeAddressCommandStructureException();
 		}
 		

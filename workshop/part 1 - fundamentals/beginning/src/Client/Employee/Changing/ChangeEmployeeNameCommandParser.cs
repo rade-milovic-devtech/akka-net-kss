@@ -6,7 +6,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 {
 	public static class ChangeEmployeeNameCommandParser
 	{
-		private const string NameChangeType = "name";
+		private const string Name = "name";
 
 		public static ChangeEmployeeNameCommand Parse(string command)
 		{
@@ -44,7 +44,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 				throw new ChangeEmployeeNameCommandStructureException();
 
 			var changeType = GetChangeTypeFrom(arguments);
-			if (!string.Equals(changeType, NameChangeType, StringComparison.InvariantCultureIgnoreCase))
+			if (!string.Equals(changeType, Name, StringComparison.InvariantCultureIgnoreCase))
 				throw new ChangeEmployeeNameCommandStructureException();
 		}
 
