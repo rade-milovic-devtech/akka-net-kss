@@ -4,7 +4,7 @@ namespace AkkaPayroll.Client.Employee.Changing
 {
     public class ChangeEmployeeToSalariedCommandStructureException : Exception
     {
-        private const string ErrorMessage = "Inappropriate command structure. The required format is: \"ChgEmp <empId> Salaried \"<monthlySalary>\"\".";
+        private const string ErrorMessage = "Inappropriate command structure. The required format is: \"ChgEmp <empId> Salaried <monthlySalary>\".";
 
         public ChangeEmployeeToSalariedCommandStructureException() : base(ErrorMessage) { }
 
