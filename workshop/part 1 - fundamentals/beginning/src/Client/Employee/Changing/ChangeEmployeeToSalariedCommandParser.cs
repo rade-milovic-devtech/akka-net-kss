@@ -3,26 +3,26 @@ using System.Linq;
 
 namespace AkkaPayroll.Client.Employee.Changing
 {
-    public static class ChangeEmployeeToHourlyCommandParser
+    public static class ChangeEmployeeToSalariedCommandParser
     {
-        private const string HourlyEmployeeType = "hourly";
+        private const string SalariedEmployeeType = "salaried";
         
-        public static ChangeEmployeeToHourlyCommand Parse(string command)
+        public static ChangeEmployeeToSalariedCommand Parse(string command)
         {
             try
             {
                 var arguments = GetArgumentsFor(command);
-
-                Validate(arguments);
             
-                return new ChangeEmployeeToHourlyCommand(GetIdFrom(arguments), GetHourlyRateFrom(arguments));
+                Validate(arguments);
+                
+                return new ChangeEmployeeToSalariedCommand(GetIdFrom(arguments), GetMonthlySalaryFrom(arguments));
             }
             catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
             {
-                throw new ChangeEmployeeToHourlyCommandStructureException(ex);
+                throw new ChangeEmployeeToSalariedCommandStructureException(ex);
             }
         }
-
+        
         private static string[] GetArgumentsFor(string command)
         {
             var commandTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);;
@@ -31,21 +31,21 @@ namespace AkkaPayroll.Client.Employee.Changing
                 .Skip(1)
                 .ToArray();
         }
-
+        
         private static void Validate(string[] arguments)
         {
             if (arguments.Length > 3)
-                throw new ChangeEmployeeToHourlyCommandStructureException();
+                throw new ChangeEmployeeToSalariedCommandStructureException();
             
             var changeType = GetChangeTypeFrom(arguments);
-            if (!string.Equals(changeType, HourlyEmployeeType, StringComparison.InvariantCultureIgnoreCase))
-                throw new ChangeEmployeeToHourlyCommandStructureException();
+            if (!string.Equals(changeType, SalariedEmployeeType, StringComparison.InvariantCultureIgnoreCase))
+                throw new ChangeEmployeeToSalariedCommandStructureException();
         }
-
+        
         private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
         
         private static int GetIdFrom(string[] arguments) => int.Parse(arguments[0]);
 
-        private static decimal GetHourlyRateFrom(string[] arguments) => decimal.Parse(arguments[2]);
+        private static decimal GetMonthlySalaryFrom(string[] arguments) => decimal.Parse(arguments[2]);
     }
 }

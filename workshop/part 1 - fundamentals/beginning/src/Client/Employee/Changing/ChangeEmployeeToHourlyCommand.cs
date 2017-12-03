@@ -13,12 +13,12 @@
         
         public override bool Equals(object obj)
         {
-            var convertEmployeeToHourlyCommand = obj as ChangeEmployeeToHourlyCommand;
+            var changeEmployeeToHourlyCommand = obj as ChangeEmployeeToHourlyCommand;
 
-            if (ReferenceEquals(convertEmployeeToHourlyCommand, null)) return false;
+            if (ReferenceEquals(changeEmployeeToHourlyCommand, null)) return false;
 
-            return Id == convertEmployeeToHourlyCommand.Id
-                   && HourlyRate == convertEmployeeToHourlyCommand.HourlyRate;
+            return Id == changeEmployeeToHourlyCommand.Id
+                   && HourlyRate == changeEmployeeToHourlyCommand.HourlyRate;
         }
 
         public override int GetHashCode()

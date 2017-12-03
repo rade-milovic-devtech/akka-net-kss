@@ -6,17 +6,17 @@ using Xunit;
 
 namespace AkkaPayroll.Client.Tests.Employee.Changing
 {
-    public class ChangeEmployeeToHourlyCommandParserTest
+    public class ChangeEmployeeToHourlyCommandParserTests
     {
         [Theory, AutoData]
-        public void ShouldRecognizeConvertEmployeeToHourlyCommand(int id, decimal hourlyRate)
+        public void ShouldRecognizeChangeEmployeeToHourlyCommand(int id, decimal hourlyRate)
         {
-            var expectedConvertEmployeeToHourlyCommand = new ChangeEmployeeToHourlyCommand(id, hourlyRate);
+            var expectedChangeEmployeeToHourlyCommand = new ChangeEmployeeToHourlyCommand(id, hourlyRate);
             var command = $"ChgEmp {id} Hourly {hourlyRate}";
 
-            var convertEmployeeToHourlyCommand = ChangeEmployeeToHourlyCommandParser.Parse(command);
+            var changeEmployeeToHourlyCommand = ChangeEmployeeToHourlyCommandParser.Parse(command);
 
-            convertEmployeeToHourlyCommand.Should().Be(expectedConvertEmployeeToHourlyCommand);
+            changeEmployeeToHourlyCommand.Should().Be(expectedChangeEmployeeToHourlyCommand);
         }
 
         [Theory]
