@@ -1,8 +1,8 @@
 ﻿namespace AkkaPayroll.Client.Employee.Changing
 {
-    public class ConvertEmployeeToHourlyCommand
+    public class ChangeEmployeeToHourlyCommand
     {
-        public ConvertEmployeeToHourlyCommand(int id, decimal hourlyRate)
+        public ChangeEmployeeToHourlyCommand(int id, decimal hourlyRate)
         {
             Id = id;
             HourlyRate = hourlyRate;
@@ -13,7 +13,7 @@
         
         public override bool Equals(object obj)
         {
-            var convertEmployeeToHourlyCommand = obj as ConvertEmployeeToHourlyCommand;
+            var convertEmployeeToHourlyCommand = obj as ChangeEmployeeToHourlyCommand;
 
             if (ReferenceEquals(convertEmployeeToHourlyCommand, null)) return false;
 
@@ -33,6 +33,6 @@
         }
 
         public override string ToString() =>
-            $"{nameof(ConvertEmployeeToHourlyCommand)} {{ {nameof(Id)}: {Id}, {nameof(HourlyRate)}: {HourlyRate} }}";
+            $"{nameof(ChangeEmployeeToHourlyCommand)} {{ {nameof(Id)}: {Id}, {nameof(HourlyRate)}: {HourlyRate} }}";
     }
 }

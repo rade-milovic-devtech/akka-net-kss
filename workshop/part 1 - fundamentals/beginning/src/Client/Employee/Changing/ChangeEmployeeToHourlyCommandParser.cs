@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace AkkaPayroll.Client.Employee.Changing
 {
-    public static class ConvertEmployeeToHourlyCommandParser
+    public static class ChangeEmployeeToHourlyCommandParser
     {
         private const string HourlyPaymentType = "hourly";
         
-        public static ConvertEmployeeToHourlyCommand Parse(string command)
+        public static ChangeEmployeeToHourlyCommand Parse(string command)
         {
             try
             {
@@ -15,11 +15,11 @@ namespace AkkaPayroll.Client.Employee.Changing
 
                 Validate(arguments);
             
-                return new ConvertEmployeeToHourlyCommand(GetIdFrom(arguments), GetHourlyRateFrom(arguments));
+                return new ChangeEmployeeToHourlyCommand(GetIdFrom(arguments), GetHourlyRateFrom(arguments));
             }
             catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
             {
-                throw new ConvertEmployeeToHourlyCommandStructureException(ex);
+                throw new ChangeEmployeeToHourlyCommandStructureException(ex);
             }
         }
 
@@ -35,11 +35,11 @@ namespace AkkaPayroll.Client.Employee.Changing
         private static void Validate(string[] arguments)
         {
             if (arguments.Length > 3)
-                throw new ConvertEmployeeToHourlyCommandStructureException();
+                throw new ChangeEmployeeToHourlyCommandStructureException();
             
             var changeType = GetChangeTypeFrom(arguments);
             if (!string.Equals(changeType, HourlyPaymentType, StringComparison.InvariantCultureIgnoreCase))
-                throw new ConvertEmployeeToHourlyCommandStructureException();
+                throw new ChangeEmployeeToHourlyCommandStructureException();
         }
 
         private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
