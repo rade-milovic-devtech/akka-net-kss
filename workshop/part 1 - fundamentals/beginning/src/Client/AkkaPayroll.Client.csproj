@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -49,6 +50,9 @@
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommandStructureException.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommandParser.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToDirectCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToDirectCommandParser.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToDirectCommandStructureException.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommandStructureException.cs" />

@@ -87,6 +87,7 @@
     <Compile Include="Employee\Adding\AddEmployeeCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeAddressCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeNameCommandParserTests.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToDirectCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToCommissionedCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToHourlyCommandParserTests.cs" />
