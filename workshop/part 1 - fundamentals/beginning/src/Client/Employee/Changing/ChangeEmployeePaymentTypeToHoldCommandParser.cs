@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.Employee.Changing
 {
@@ -11,7 +11,7 @@ namespace AkkaPayroll.Client.Employee.Changing
         {
             try
             {
-                var arguments = GetArgumentsFor(command);
+                var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
             
                 Validate(arguments);
             
@@ -21,15 +21,6 @@ namespace AkkaPayroll.Client.Employee.Changing
             {
                 throw new ChangeEmployeePaymentTypeToHoldCommandStructureException(ex);
             }
-        }
-        
-        private static string[] GetArgumentsFor(string command)
-        {
-            var commandTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);;
-
-            return commandTokens.Where(token => !string.IsNullOrWhiteSpace(token))
-                .Skip(1)
-                .ToArray();
         }
         
         private static void Validate(string[] arguments)

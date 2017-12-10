@@ -24,8 +24,7 @@ namespace AkkaPayroll.Client.Tests.Employee.Changing
 		[InlineData("ChgEmp 1")]
 		[InlineData("ChgEmp 1 Name")]
 		[InlineData("ChgEmp a Name \"John Doe\"")]
-		[InlineData("ChgEmp 1 Name John")]
-		[InlineData("ChgEmp 1 Name \"John Doe\" 1")]
+		[InlineData("ChgEmp 1 Name John 1")]
 		[InlineData("ChgEmp 1 Bla \"John Doe\"")]
 		public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
 		{

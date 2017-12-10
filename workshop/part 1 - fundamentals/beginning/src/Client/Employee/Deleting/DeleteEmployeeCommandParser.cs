@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.Employee.Deleting
 {
@@ -9,7 +9,7 @@ namespace AkkaPayroll.Client.Employee.Deleting
 		{
 			try
 			{
-				var arguments = GetArgumentsFor(command);
+				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
 				Validate(arguments);
 
@@ -19,15 +19,6 @@ namespace AkkaPayroll.Client.Employee.Deleting
 			{
 				throw new DeleteEmployeeCommandStructureException(ex);
 			}
-		}
-
-		private static string[] GetArgumentsFor(string command)
-		{
-			var commandTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);;
-
-			return commandTokens.Where(token => !string.IsNullOrWhiteSpace(token))
-				.Skip(1)
-				.ToArray();
 		}
 
 		private static void Validate(string[] arguments)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.SalesReceipt.Posting
@@ -10,7 +9,7 @@ namespace AkkaPayroll.Client.SalesReceipt.Posting
 		{
 			try
 			{
-				var arguments = GetArgumentsFor(command);
+				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
 				Validate(arguments);
 
@@ -23,15 +22,6 @@ namespace AkkaPayroll.Client.SalesReceipt.Posting
 			{
 				throw new PostSalesReceiptCommandStructureException(ex);
 			}
-		}
-
-		private static string[] GetArgumentsFor(string command)
-		{
-			var commandTokens = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);;
-
-			return commandTokens.Where(token => !string.IsNullOrWhiteSpace(token))
-				.Skip(1)
-				.ToArray();
 		}
 
 		private static void Validate(string[] arguments)

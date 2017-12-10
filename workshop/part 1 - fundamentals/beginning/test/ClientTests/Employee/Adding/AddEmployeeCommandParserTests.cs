@@ -43,36 +43,29 @@ namespace AkkaPayroll.Client.Tests.Employee.Adding
 
 		[Theory]
 		[InlineData("AddEmp")]
+		[InlineData("AddEmp 1")]
 		[InlineData("AddEmp 1 \"John Doe\"")]
-		[InlineData("AddEmp a \"John Doe\" \"Some Street\" H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\"")]
 		[InlineData("AddEmp 1 \"John Doe\" H 1.2")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" H")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" H a")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" H 1.2 a")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" H")]
+		[InlineData("AddEmp a \"John Doe\" \"Some Street 123\" H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" H a")]
+		[InlineData("AddEmp 1 John Street H 1.2 a")]
 		[InlineData("AddEmp 1 \"John Doe\" S 1000")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" S")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" S b")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" S 1000 b")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" S")]
+		[InlineData("AddEmp a \"John Doe\" \"Some Street 123\" S 1000")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" S b")]
+		[InlineData("AddEmp 1 John Street S 1000 b")]
 		[InlineData("AddEmp 1 \"John Doe\" C 1000 1.2")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C c 1.2")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000 c")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C c d")]
-		[InlineData("AddEmp 1 \"John Doe\" \"Some Street\" C 1000 1.2 c")]
-		[InlineData("AddEmp 1 John \"Some Street\" H 1.2")]
-		[InlineData("AddEmp 1 \"John Doe\" Street H 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" C")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" C 1000")]
+		[InlineData("AddEmp a \"John Doe\" \"Some Street 123\" C 1000 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" C c 1.2")]
+		[InlineData("AddEmp 1 \"John Doe\" \"Some Street 123\" C 1000 c")]
+		[InlineData("AddEmp 1 John Street C 1000 1.2 c")]
+		[InlineData("AddEmp 1 John Street Z 1000 1.2")]
 		public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
 		{
-			Action commandExecutor = () => AddEmployeeCommandParser.Parse(command);
-
-			commandExecutor.ShouldThrow<AddEmployeeCommandStructureException>();
-		}
-
-		[Fact]
-		public void ShouldErrorWhenEmployeeTypeIsNotRecognized()
-		{
-			var command = "AddEmp 1 \"John Doe\" \"Some Street\" Z 1000 1.2";
 			Action commandExecutor = () => AddEmployeeCommandParser.Parse(command);
 
 			commandExecutor.ShouldThrow<AddEmployeeCommandStructureException>();

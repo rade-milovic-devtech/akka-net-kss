@@ -23,10 +23,9 @@ namespace AkkaPayroll.Client.Tests.Employee.Changing
 		[InlineData("ChgEmp")]
 		[InlineData("ChgEmp 1")]
 		[InlineData("ChgEmp 1 Address")]
-		[InlineData("ChgEmp a Address \"Some Street\"")]
-		[InlineData("ChgEmp 1 Address Street")]
-		[InlineData("ChgEmp 1 Address \"Some Street\" 1")]
-		[InlineData("ChgEmp 1 Bla \"Some Street\"")]
+		[InlineData("ChgEmp a Address \"Some Street 123\"")]
+		[InlineData("ChgEmp 1 Address Street 1")]
+		[InlineData("ChgEmp 1 Bla \"Some Street 123\"")]
 		public void ShouldErrorWhenCommandStructureIsInappropriate(string command)
 		{
 			Action action = () => ChangeEmployeeAddressCommandParser.Parse(command);

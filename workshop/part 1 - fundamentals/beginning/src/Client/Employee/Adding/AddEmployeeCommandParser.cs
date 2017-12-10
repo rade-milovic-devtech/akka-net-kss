@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.Employee.Adding
 {
@@ -14,7 +13,7 @@ namespace AkkaPayroll.Client.Employee.Adding
 		{
 			try
 			{
-				var arguments = GetArgumentsFor(command);
+				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
 				var employeeType = GetEmployeeTypeFrom(arguments);
 
@@ -26,21 +25,6 @@ namespace AkkaPayroll.Client.Employee.Adding
 			{
 				throw new AddEmployeeCommandStructureException(ex);
 			}
-		}
-
-		private static string[] GetArgumentsFor(string command)
-		{
-			var commandTokens = command.Split(new[] { '"' }, StringSplitOptions.RemoveEmptyEntries)
-				.Where(token => !string.IsNullOrWhiteSpace(token))
-				.ToArray();
-
-			var arguments = new List<string>();
-			arguments.Add(commandTokens[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1]);
-			arguments.Add(commandTokens[1]);
-			arguments.Add(commandTokens[2]);
-			arguments.AddRange(commandTokens[3].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-
-			return arguments.ToArray();
 		}
 
 		private static EmployeeType GetEmployeeTypeFrom(string[] arguments)

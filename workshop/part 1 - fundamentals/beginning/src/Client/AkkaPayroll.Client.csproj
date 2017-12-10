@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommandsArgumentsExtractor.cs" />
     <Compile Include="Employee\Adding\AddCommissionedEmployeeCommand.cs" />
     <Compile Include="Employee\Adding\AddEmployeeCommand.cs" />
     <Compile Include="Employee\Adding\AddEmployeeCommandParser.cs" />

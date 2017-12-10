@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using Microsoft.VisualBasic.FileIO;
+using AkkaPayroll.Client.Common;
 
 namespace AkkaPayroll.Client.Employee.Changing
 {
@@ -13,7 +11,7 @@ namespace AkkaPayroll.Client.Employee.Changing
         {
             try
             {
-                var arguments = GetArgumentsFor(command);
+                var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
                 Validate(arguments);
                 
@@ -25,21 +23,6 @@ namespace AkkaPayroll.Client.Employee.Changing
             catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
             {
                 throw new ChangeEmployeePaymentTypeToDirectCommandStructureException(ex);
-            }
-        }
-        
-        private static string[] GetArgumentsFor(string command)
-        {
-            using (var reader = new StringReader(command))
-            using (var textFieldParser = new TextFieldParser(reader))
-            {
-                textFieldParser.Delimiters = new[] { " " };
-                textFieldParser.HasFieldsEnclosedInQuotes = true;
-                textFieldParser.TrimWhiteSpace = true;
-
-                var fields = textFieldParser.ReadFields();
-
-                return fields?.Skip(1).ToArray() ?? new string[0];
             }
         }
         
