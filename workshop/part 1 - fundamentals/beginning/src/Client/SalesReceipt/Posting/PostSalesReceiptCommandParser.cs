@@ -11,24 +11,22 @@ namespace AkkaPayroll.Client.SalesReceipt.Posting
 			{
 				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
-				Validate(arguments);
+				if (!AreValid(arguments))
+					throw new PostSalesReceiptCommandStructureException();
 
 				return new PostSalesReceiptCommand(
 					GetEmployeeIdFrom(arguments),
 					GetDateFrom(arguments),
 					GetAmountFrom(arguments));
 			}
-			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			catch (PostSalesReceiptCommandStructureException) { throw; }
+			catch (Exception ex)
 			{
 				throw new PostSalesReceiptCommandStructureException(ex);
 			}
 		}
 
-		private static void Validate(string[] arguments)
-		{
-			if (arguments.Length > 3)
-				throw new PostSalesReceiptCommandStructureException();
-		}
+		private static bool AreValid(string[] arguments) => arguments.Length == 3;
 
 		private static int GetEmployeeIdFrom(string[] arguments) => int.Parse(arguments[0]);
 

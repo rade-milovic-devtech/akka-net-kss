@@ -12,26 +12,25 @@ namespace AkkaPayroll.Client.Employee.Changing
             try
             {
                 var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
-            
-                Validate(arguments);
-            
+
+                if (!AreValid(arguments))
+                    throw new ChangeEmployeePaymentTypeToHoldCommandStructureException();
+
                 return new ChangeEmployeePaymentTypeToHoldCommand(GetIdFrom(arguments));
             }
-            catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+            catch (ChangeEmployeePaymentTypeToHoldCommandStructureException) { throw; }
+            catch (Exception ex)
             {
                 throw new ChangeEmployeePaymentTypeToHoldCommandStructureException(ex);
             }
         }
         
-        private static void Validate(string[] arguments)
-        {
-            if (arguments.Length > 2)
-                throw new ChangeEmployeePaymentTypeToHoldCommandStructureException();
-            
-            var changeType = GetChangeTypeFrom(arguments);
-            if (!string.Equals(changeType, HoldPaymentType, StringComparison.InvariantCultureIgnoreCase))
-                throw new ChangeEmployeePaymentTypeToHoldCommandStructureException();
-        }
+        private static bool AreValid(string[] arguments) =>
+            arguments.Length == 2 &&
+            ChangeTypeIsHoldPaymentType(arguments);
+
+        private static bool ChangeTypeIsHoldPaymentType(string[] arguments) =>
+            string.Equals(GetChangeTypeFrom(arguments), HoldPaymentType, StringComparison.InvariantCultureIgnoreCase);
         
         private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
         

@@ -11,24 +11,22 @@ namespace AkkaPayroll.Client.TimeCard.Posting
 			{
 				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
-				Validate(arguments);
+				if (!AreValid(arguments))
+					throw new PostTimeCardCommandStructureException();
 
 				return new PostTimeCardCommand(
 					GetEmployeeIdFrom(arguments),
 					GetDateFrom(arguments),
 					GetHoursFrom(arguments));
 			}
-			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			catch (PostTimeCardCommandStructureException) { throw; }
+			catch (Exception ex)
 			{
 				throw new PostTimeCardCommandStructureException(ex);
 			}
 		}
 
-		private static void Validate(string[] arguments)
-		{
-			if (arguments.Length > 3)
-				throw new PostTimeCardCommandStructureException();
-		}
+		private static bool AreValid(string[] arguments) => arguments.Length == 3;
 
 		private static int GetEmployeeIdFrom(string[] arguments) => int.Parse(arguments[0]);
 

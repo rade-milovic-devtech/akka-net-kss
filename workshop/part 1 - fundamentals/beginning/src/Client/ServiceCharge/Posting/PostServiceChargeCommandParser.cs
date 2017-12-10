@@ -11,21 +11,19 @@ namespace AkkaPayroll.Client.ServiceCharge.Posting
 			{
 				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
-				Validate(arguments);
+				if (!AreValid(arguments))
+					throw new PostServiceChargeCommandStructureException();
 
 				return new PostServiceChargeCommand(GetMemberIdFrom(arguments), GetAmountFrom(arguments));
 			}
-			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			catch (PostServiceChargeCommandStructureException) { throw; }
+			catch (Exception ex)
 			{
 				throw new PostServiceChargeCommandStructureException(ex);
 			}
 		}
 
-		private static void Validate(string[] arguments)
-		{
-			if (arguments.Length > 2)
-				throw new PostServiceChargeCommandStructureException();
-		}
+		private static bool AreValid(string[] arguments) => arguments.Length == 2;
 
 		private static int GetMemberIdFrom(string[] arguments) => int.Parse(arguments[0]);
 

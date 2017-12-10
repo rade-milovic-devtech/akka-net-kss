@@ -13,28 +13,27 @@ namespace AkkaPayroll.Client.Employee.Changing
             {
                 var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
-                Validate(arguments);
+                if (!AreValid(arguments))
+                    throw new ChangeEmployeePaymentTypeToDirectCommandStructureException();
                 
                 return new ChangeEmployeePaymentTypeToDirectCommand(
                     GetIdFrom(arguments),
                     GetBankFrom(arguments),
                     GetAccountFrom(arguments));
             }
-            catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+            catch (ChangeEmployeePaymentTypeToDirectCommandStructureException) { throw; }
+            catch (Exception ex)
             {
                 throw new ChangeEmployeePaymentTypeToDirectCommandStructureException(ex);
             }
         }
         
-        private static void Validate(string[] arguments)
-        {
-            if (arguments.Length > 4)
-                throw new ChangeEmployeePaymentTypeToDirectCommandStructureException();
+        private static bool AreValid(string[] arguments) =>
+            arguments.Length == 4 &&
+            ChangeTypeIsDirectPaymentType(arguments);
 
-            var changeType = GetChangeTypeFrom(arguments);
-            if (!string.Equals(changeType, DirectPaymentType, StringComparison.InvariantCultureIgnoreCase))
-                throw new ChangeEmployeePaymentTypeToDirectCommandStructureException();
-        }
+        private static bool ChangeTypeIsDirectPaymentType(string[] arguments) =>
+            string.Equals(GetChangeTypeFrom(arguments), DirectPaymentType, StringComparison.InvariantCultureIgnoreCase);
         
         private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
         

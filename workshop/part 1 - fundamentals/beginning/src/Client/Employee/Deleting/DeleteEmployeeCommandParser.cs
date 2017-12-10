@@ -11,21 +11,19 @@ namespace AkkaPayroll.Client.Employee.Deleting
 			{
 				var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
 
-				Validate(arguments);
+				if (!AreValid(arguments))
+					throw new DeleteEmployeeCommandStructureException();
 
 				return new DeleteEmployeeCommand(GetIdFrom(arguments));
 			}
-			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			catch (DeleteEmployeeCommandStructureException) { throw; }
+			catch (Exception ex)
 			{
 				throw new DeleteEmployeeCommandStructureException(ex);
 			}
 		}
 
-		private static void Validate(string[] arguments)
-		{
-			if (arguments.Length > 1)
-				throw new DeleteEmployeeCommandStructureException();
-		}
+		private static bool AreValid(string[] arguments) => arguments.Length == 1;
 
 		private static int GetIdFrom(string[] arguments) => int.Parse(arguments[0]);
 	}

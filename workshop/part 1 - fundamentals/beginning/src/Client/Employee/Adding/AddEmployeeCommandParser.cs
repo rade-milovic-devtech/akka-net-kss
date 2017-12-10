@@ -17,11 +17,13 @@ namespace AkkaPayroll.Client.Employee.Adding
 
 				var employeeType = GetEmployeeTypeFrom(arguments);
 
-				Validate(arguments, employeeType);
+				if (!AreValid(arguments, employeeType))
+					throw new AddEmployeeCommandStructureException();
 
 				return BuildFrom(arguments, employeeType);
 			}
-			catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+			catch (AddEmployeeCommandStructureException) { throw; }
+			catch (Exception ex)
 			{
 				throw new AddEmployeeCommandStructureException(ex);
 			}
@@ -41,14 +43,9 @@ namespace AkkaPayroll.Client.Employee.Adding
 			throw new AddEmployeeCommandStructureException();
 		}
 
-		private static void Validate(string[] arguments, EmployeeType employeeType)
-		{
-			if (employeeType == EmployeeType.Commissioned && arguments.Length <= 6) return;
-
-			if (arguments.Length <= 5) return;
-
-			throw new AddEmployeeCommandStructureException();
-		}
+		private static bool AreValid(string[] arguments, EmployeeType employeeType) =>
+			(employeeType == EmployeeType.Commissioned && arguments.Length == 6) ||
+			(employeeType != EmployeeType.Commissioned && arguments.Length == 5);
 
 		private static AddEmployeeCommand BuildFrom(string[] arguments, EmployeeType employeeType)
 		{

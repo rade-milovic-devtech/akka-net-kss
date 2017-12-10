@@ -13,28 +13,27 @@ namespace AkkaPayroll.Client.Employee.Changing
             {
                 var arguments = CommandsArgumentsExtractor.ExtractFrom(command);
             
-                Validate(arguments);
+                if (!AreValid(arguments))
+                    throw new ChangeEmployeeToCommissionedCommandStructureException();
             
                 return new ChangeEmployeeToCommissionedCommand(
                     GetIdFrom(arguments),
                     GetMonthlySalaryFrom(arguments),
                     GetCommissionRateFrom(arguments));
             }
-            catch (Exception ex) when (ex is IndexOutOfRangeException || ex is FormatException)
+            catch (ChangeEmployeeToCommissionedCommandStructureException) { throw; }
+            catch (Exception ex)
             {
                 throw new ChangeEmployeeToCommissionedCommandStructureException(ex);
             }
         }
         
-        private static void Validate(string[] arguments)
-        {
-            if (arguments.Length > 4)
-                throw new ChangeEmployeeToCommissionedCommandStructureException();
-            
-            var changeType = GetChangeTypeFrom(arguments);
-            if (!string.Equals(changeType, CommissionedEmployeeType, StringComparison.InvariantCultureIgnoreCase))
-                throw new ChangeEmployeeToCommissionedCommandStructureException();
-        }
+        private static bool AreValid(string[] arguments) =>
+            arguments.Length == 4 &&
+            ChangeTypeIsCommissionedEmployeeType(arguments);
+
+        private static bool ChangeTypeIsCommissionedEmployeeType(string[] arguments) =>
+            string.Equals(GetChangeTypeFrom(arguments), CommissionedEmployeeType, StringComparison.InvariantCultureIgnoreCase);
         
         private static string GetChangeTypeFrom(string[] arguments) => arguments[1];
         
