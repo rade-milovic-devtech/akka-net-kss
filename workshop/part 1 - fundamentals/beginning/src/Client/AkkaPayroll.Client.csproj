@@ -66,6 +66,9 @@
     <Compile Include="Employee\Changing\ChangeEmployeeToHourlyCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToHourlyCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToHourlyCommandStructureException.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToNonUnionMemberCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToNonUnionMemberCommandParser.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToNonUnionMemberCommandStructureException.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandStructureException.cs" />

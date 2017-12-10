@@ -92,6 +92,7 @@
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToMailCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToCommissionedCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToHourlyCommandParserTests.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToNonUnionMemberCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToUnionMemberCommandParserTests.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandParserTests.cs" />
