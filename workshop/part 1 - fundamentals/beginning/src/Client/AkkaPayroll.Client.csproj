@@ -69,6 +69,9 @@
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandStructureException.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToUnionMemberCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToUnionMemberCommandParser.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeeToUnionMemberCommandStructureException.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommand.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandParser.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandStructureException.cs" />
