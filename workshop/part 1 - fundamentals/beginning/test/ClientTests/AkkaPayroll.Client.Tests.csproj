@@ -96,6 +96,7 @@
     <Compile Include="Employee\Changing\ChangeEmployeeToSalariedCommandParserTests.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToUnionMemberCommandParserTests.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandParserTests.cs" />
+    <Compile Include="Payroll\Running\RunPayrollCommandTests.cs" />
     <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommandParserTests.cs" />
     <Compile Include="ServiceCharge\Posting\PostServiceChargeCommandParserTests.cs" />
     <Compile Include="TimeCard\Posting\PostTimeCardCommandParserTests.cs" />

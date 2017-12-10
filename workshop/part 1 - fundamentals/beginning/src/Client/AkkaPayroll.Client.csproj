@@ -79,6 +79,9 @@
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandParser.cs" />
     <Compile Include="Employee\Deleting\DeleteEmployeeCommandStructureException.cs" />
     <Compile Include="Employee\EmployeeType.cs" />
+    <Compile Include="Payroll\Running\RunPayrollCommand.cs" />
+    <Compile Include="Payroll\Running\RunPayrollCommandParser.cs" />
+    <Compile Include="Payroll\Running\RunPayrollCommandStructureException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesReceipt\Posting\PostSalesReceiptCommand.cs" />
