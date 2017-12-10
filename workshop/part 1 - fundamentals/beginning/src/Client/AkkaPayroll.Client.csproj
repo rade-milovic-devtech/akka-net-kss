@@ -57,6 +57,9 @@
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToHoldCommandStructureException.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToMailCommand.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToMailCommandParser.cs" />
+    <Compile Include="Employee\Changing\ChangeEmployeePaymentTypeToMailCommandStructureException.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToCommissionedCommand.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToCommissionedCommandParser.cs" />
     <Compile Include="Employee\Changing\ChangeEmployeeToCommissionedCommandStructureException.cs" />
